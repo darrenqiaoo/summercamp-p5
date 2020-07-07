@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "8"
+env:
+    # it should change to the related token in codacy
+  - CODACY_PROJECT_TOKEN=bfa0e8358d794df199355b3f2587c7bc
+before_script:
+  - sudo apt-get install jq
+  - curl -LSs "$(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -o codacy-coverage-reporter-assembly.jar
+  #- npm install -g karma
+script: true
+  #- npm run build
+  #- npm run test
+  #- npm run lint
+after_success:
+  - ls
+  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./lcov.info
