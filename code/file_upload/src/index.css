@@ -1,0 +1,51 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.fUpload_area {
+    width: 600px;
+    height: 400px;
+    margin: 100px auto;
+    background-color: beige;
+    border: 2px dashed red;
+}
+
+
+.fileField {
+    width: 600px;
+    height: 400px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+/*Drop and open files in Citrix Workspace*/
+.tips1 {
+    height: 30px;
+    font-size: 20px;
+    color: rgb(99,99,99);
+    font-weight: bold;
+    line-height: 30px;
+}
+
+/*Hold shift to upload to Ctrix Files directly*/
+.tips2 {
+    height: 30px;
+    color: rgb(190,190,190);
+    line-height: 30px;
+}
+
+/*shift 图标*/
+.shift_icon {
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    background-color: rgb(236,236,236);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(193,193,193);
+    text-align: center;
+    line-height: 20px;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
