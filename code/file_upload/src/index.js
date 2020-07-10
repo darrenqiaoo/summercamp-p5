@@ -98,7 +98,7 @@ class FileField extends React.Component{
                 </div>
                 <div className={"file_list_container"}>
                     <div className={"showFile"}>
-                        <textarea id={"showBox"}></textarea>
+                        <textarea id={"showBox"}/>
                     </div>
                     <ul className={"file_ul"}>
                         {fileList}
