@@ -2,17 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-
-function FileList(props){
-    const files = props.files;
-    const listItems = files.map((file)=>
-        <li key={file.name.toString()}>{file.name}</li>);
-    return (
-        <ul className={"file_ul"}>
-            {listItems}
-        </ul>
-    );
- }
 class FileField extends React.Component{
     constructor(props) {
         super(props);
@@ -42,22 +31,57 @@ class FileField extends React.Component{
         });
     }
     onFileNumChange(){
-        let objFile = document.getElementById("file_input");
+        let objFile = document.getElementById("file_input").files[0];
         let temp = this.state.files.slice();
-        temp.push(objFile.files[0]);
+        const tempNames = temp.map(f => f.name);
+        //console.log(tempNames);
+        if(!objFile){
+            return ;
+        }
+        if(tempNames.indexOf(objFile.name)>-1){
+            alert("File already exists");
+            return ;
+        }
+        temp.push(objFile);
         this.setState({
             tips: temp.length + " file has been added",
             files: temp,
         });
-        console.log(temp[temp.length-1].name);
+        //console.log(temp[temp.length-1].name);
     }
     clear(){
         this.setState({
             tips: "no file has been added",
             files: [],
         });
+        const showBox = document.getElementById("showBox");
+        showBox.innerHTML = "";
     }
+    liClick(file_name){
+        const temp = file_name.split('.');
+        const support = ["txt", "html", "md", "css", "js"];
+        if(support.indexOf(temp[temp.length-1])===-1){
+            const showBox = document.getElementById("showBox");
+            showBox.innerHTML = "Can only preview .txt, .html, .md, .css, .js files";
+            return ;
+        }
+        const files = this.state.files.slice();
+        const file_names = files.map(f => f.name);
+        const index = file_names.indexOf(file_name);
+        let reader = new FileReader();
+        reader.onload = function() {
+            if(reader.result) {
+                const showBox = document.getElementById("showBox");
+                showBox.innerHTML = reader.result;
+            }
+        };
+        reader.readAsText(files[index]);
+    };
     render() {
+        const files = this.state.files;
+        const fileList = files.map(file => {
+            return(<li key={file.name.toString()} onClick={() => this.liClick(file.name)}>{file.name}</li>);
+        });
         return (
             <div className="fileField">
                 <p className="tips1">Drop files to the following box</p>
@@ -73,7 +97,13 @@ class FileField extends React.Component{
                            onChange={() => this.onFileNumChange()}/>
                 </div>
                 <div className={"file_list_container"}>
-                    <FileList files={this.state.files}/>
+                    <div className={"showFile"}>
+                        <textarea id={"showBox"}></textarea>
+                    </div>
+                    <ul className={"file_ul"}>
+                        {fileList}
+                    </ul>
+
                 </div>
                 <button className={"submit"}> submit </button>
                 <button className={"clear"} onClick={this.clear}> clear </button>

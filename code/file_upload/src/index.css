@@ -54,9 +54,21 @@
     width: 300px;
     height: 80px;
     line-height: 80px;
-    border: 2px dotted green;
     margin: 10px auto;
     cursor: pointer;
+    background: linear-gradient(0deg, transparent 6px, green 6px) repeat-y,
+                linear-gradient(0deg, transparent 50%, green 0) repeat-y,
+                linear-gradient(90deg, transparent 50%, green 0) repeat-x,
+                linear-gradient(90deg, transparent 50%, green 0) repeat-x;
+    background-size: 1px 12px, 1px 12px, 12px 1px, 12px 1px;
+    background-position: 0 0, 100% 0, 0 0, 0 100%;
+    animation: move 0.7s infinite linear;
+}
+@keyframes move {
+    from {}
+    to {
+        background-position: 0 -12px, 100% 12px, 12px 0, -12px 100%;
+    }
 }
 .tips3 {
     height: 20px;
@@ -75,21 +87,56 @@
 .file_list_container {
     width: 300px;
     height: 100px;
-    border: 2px solid orange;
-    margin: 0 auto 10px;
+    /*border: 2px solid orange;*/
+    margin: 0 auto 20px;
 }
-.file_ul {
+.showFile{
+    display: inline-block;
+    float: left;
+    width: 140px;
+    height: 100%;
+    border: 1px solid lightblue;
+}
+#showBox {
     width: 100%;
     height: 100%;
+    resize: none;
+    background-color: #FFFFCC;
+    overflow: scroll;
+}
+.file_ul {
+    display: inline-block;
+    width: 120px;
+    height: 90px;
+    float: right;
+    border: 1px solid slateblue;
+    padding: 5px 10px;
+    text-align: left;
     overflow-y: scroll;
+}
+ul::-webkit-scrollbar{
+    /*display:none;*/
+}
+li {
+    width: 120px;
+    height: 25px;
+    border-bottom: 1px solid grey;
+    list-style-type: none;
+    overflow: hidden;
+    cursor: default;
+}
+li:hover {
+    background-color: azure;
 }
 .submit {
     width: 50px;
     height: 30px;
+    cursor: pointer;
 }
 
 .clear {
     width: 50px;
     height: 30px;
     margin-left: 20px;
+    cursor: pointer;
 }
