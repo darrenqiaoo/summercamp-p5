@@ -1,0 +1,155 @@
+/*body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}*/
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+.fUpload_area {
+  width: 600px;
+  height: 400px;
+  margin: 100px auto;
+}
+
+
+.fileField {
+  width: 600px;
+  height: 400px;
+  background-color: #FFFFCC;
+  border: 2px dashed red;
+  display: table-cell;
+  text-align: center;
+}
+/*Drop and open files in Citrix Workspace*/
+.tips1 {
+  height: 30px;
+  font-size: 20px;
+  margin-top: 80px;
+  color: rgb(99,99,99);
+  font-weight: bold;
+  line-height: 30px;
+}
+
+/*Hold shift to upload to Ctrix Files directly*/
+.tips2 {
+  height: 30px;
+  color: rgb(190,190,190);
+  line-height: 30px;
+}
+
+/*shift 图标*/
+.shift_icon {
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  background-color: rgb(236,236,236);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(193,193,193);
+  text-align: center;
+  line-height: 20px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+.dropBox {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  line-height: 80px;
+  margin: 10px auto;
+  cursor: pointer;
+  background: linear-gradient(0deg, transparent 6px, green 6px) repeat-y,
+              linear-gradient(0deg, transparent 50%, green 0) repeat-y,
+              linear-gradient(90deg, transparent 50%, green 0) repeat-x,
+              linear-gradient(90deg, transparent 50%, green 0) repeat-x;
+  background-size: 1px 12px, 1px 12px, 12px 1px, 12px 1px;
+  background-position: 0 0, 100% 0, 0 0, 0 100%;
+  animation: move 0.7s infinite linear;
+}
+@keyframes move {
+  from {}
+  to {
+      background-position: 0 -12px, 100% 12px, 12px 0, -12px 100%;
+  }
+}
+.tips3 {
+  height: 20px;
+  line-height: 20px;
+  color: rgb(190,190,190);
+}
+.file_input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.file_list_container {
+  width: 300px;
+  height: 100px;
+  /*border: 2px solid orange;*/
+  margin: 0 auto 20px;
+}
+.showFile{
+  display: inline-block;
+  float: left;
+  width: 140px;
+  height: 100%;
+  border: 1px solid lightblue;
+}
+#showBox {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  background-color: #FFFFCC;
+  overflow: scroll;
+}
+.file_ul {
+  display: inline-block;
+  width: 120px;
+  height: 90px;
+  float: right;
+  border: 1px solid slateblue;
+  padding: 5px 10px;
+  text-align: left;
+  overflow-y: scroll;
+}
+ul::-webkit-scrollbar{
+  /*display:none;*/
+}
+li {
+  width: 120px;
+  height: 25px;
+  border-bottom: 1px solid grey;
+  list-style-type: none;
+  overflow: hidden;
+  cursor: default;
+}
+li:hover {
+  background-color: azure;
+}
+.submit {
+  width: 50px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.clear {
+  width: 50px;
+  height: 30px;
+  margin-left: 20px;
+  cursor: pointer;
+}
