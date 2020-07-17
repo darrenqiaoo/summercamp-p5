@@ -104,6 +104,9 @@
     background-color: #FFFFCC;
     overflow: scroll;
 }
+#showBox::-webkit-scrollbar{
+    display:none;
+}
 .file_ul {
     display: inline-block;
     width: 120px;
@@ -114,10 +117,10 @@
     text-align: left;
     overflow-y: scroll;
 }
-ul::-webkit-scrollbar{
-    /*display:none;*/
-}
-li {
+.file_ul::-webkit-scrollbar{
+     display:none;
+ }
+.file_ul>li {
     width: 120px;
     height: 25px;
     border-bottom: 1px solid grey;
@@ -125,7 +128,7 @@ li {
     overflow: hidden;
     cursor: default;
 }
-li:hover {
+.file_ul>li:hover {
     background-color: azure;
 }
 .submit {

@@ -81,9 +81,6 @@ class PageFileUpload extends React.Component{
             <div className={"fUpload_area"}>
                 <div className="fileField">
                     <p className="tips1">Drop files to the following box</p>
-                    {/*<p className="tips2">*/}
-                    {/*    Hold <span className="shift_icon">shift</span> to upload to Ctrix Files directly*/}
-                    {/*</p>*/}
                     <div className={"dropBox"} style={this.state.style}>
                         <span className={"tips3"}> {this.state.tips} </span>
                         <input type={"file"} className={"file_input"} id={"file_input"}

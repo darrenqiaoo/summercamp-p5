@@ -8,7 +8,7 @@ class AppEntry extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            curPage: 1,
+            curPage: 0,
             files: [],
         };
         this.setPage = this.setPage.bind(this);
