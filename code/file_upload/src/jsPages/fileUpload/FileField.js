@@ -2,13 +2,20 @@ import React from "react";
 import './FileField.css'
 import FileShowBox from '../../commonComponents/fileShowBox'
 import FileList from "../../commonComponents/fileList";
+import {Link} from "react-router-dom";
 
 class PageFileUpload extends React.Component{
     constructor(props) {
         super(props);
+        let storage = [];
+        for(let i=0;i<localStorage.length;i++){
+            storage.push(localStorage.key(i));
+        }
         this.state = {
+            new_files: [],
+            file_names:storage,
             style: {backgroundColor: "#FFFFCC"},
-            tips: this.props.files.length>0?this.props.files.length+" files have been added.":"There's no file.",
+            tips: localStorage.length>0?localStorage.length+" files have been added.":"There's no file.",
             showText: "",
         };
         this.submitBtnClick = this.submitBtnClick.bind(this);
@@ -36,39 +43,50 @@ class PageFileUpload extends React.Component{
     //文件数量增加
     onFileNumChange(){
         let objFile = document.getElementById("file_input").files[0];
-        let temp = this.props.files;
-        const tempNames = temp.map(f => f.name);
-        //console.log(tempNames);
+        let temp1 = this.state.new_files.slice();
+        let temp2 = this.state.file_names.slice();
         if(!objFile){
             return ;
         }
-        if(tempNames.indexOf(objFile.name)>-1){
+        if(this.state.file_names.indexOf(objFile.name)>-1){
             alert("File already exists");
             return ;
         }
-        temp.push(objFile);
+        temp1.push(objFile);
+        temp2.push(objFile.name);
         this.setState({
-            tips: temp.length + " file has been added",
+            tips: temp2.length + " file has been added",
+            new_files: temp1,
+            file_names: temp2,
         });
-        this.props.setFiles(temp);
-        //console.log(temp[temp.length-1].name);
     }
     //提交进入下一流程
     submitBtnClick(){
-        if(this.props.files.length===0){
-            alert("Please choose at least 1 file.")
+        if(this.state.new_files.length===0){
+            alert("Please choose at least 1 file!");
         }
         else{
-            this.props.setPage(1);
+            const new_file_names = this.state.new_files.map(f => f.name);
+            for(let i=0;i<new_file_names.length;i++)
+            {
+                let reader = new FileReader();
+                reader.onload = e=> {
+                    localStorage.setItem(new_file_names[i], e.target.result);
+                };
+                reader.readAsText(this.state.new_files[i],'gb2312');
+            }
+            alert("Submit successfully!")
         }
     }
     //清空文件列表
     clear(){
         this.setState({
             tips: "no file has been added",
+            new_files: [],
+            file_names: [],
             showText: "",
         });
-        this.props.setFiles([]);
+        localStorage.clear();
     }
     //供子组件调用修改showText
     setShowText(text){
@@ -91,10 +109,14 @@ class PageFileUpload extends React.Component{
                     </div>
                     <div className={"file_list_container"}>
                         <FileShowBox className={"showFile"} id={"showBox"} value={this.state.showText}/>
-                        <FileList className={"file_ul"} files={this.props.files} setShowText={this.setShowText}/>
+                        <FileList className={"file_ul"} files={this.state.file_names} setShowText={this.setShowText}/>
                     </div>
+
                     <button className={"submit"} onClick={this.submitBtnClick}> submit </button>
                     <button className={"clear"} onClick={this.clear}> clear </button>
+                    <Link to={"/extract"}>
+                        <button className={"next"}> next </button>
+                    </Link>
                 </div>
             </div>
         );

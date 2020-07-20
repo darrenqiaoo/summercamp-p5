@@ -2,22 +2,22 @@ import React from "react";
 import './infoExtract.css'
 import FileList from "../../commonComponents/fileList";
 import FileShowBox from "../../commonComponents/fileShowBox";
-
+import {Link} from "react-router-dom";
 
 class PageInfoExtract extends React.Component{
     constructor(props) {
         super(props);
+        let storage = [];
+        for(let i=0;i<localStorage.length;i++){
+            storage.push(localStorage.key(i));
+        }
         this.state = {
-            files: this.props.files,
+            files: storage,
             showText: "",
             inputValues: {},
         };
-        this.prePage = this.prePage.bind(this);
         this.setShowText = this.setShowText.bind(this);
         this.handelInputChange = this.handelInputChange.bind(this);
-    }
-    prePage(){
-        this.props.setPage(0);
     }
     setShowText(text){
         const s = text.split('\n');
@@ -52,8 +52,10 @@ class PageInfoExtract extends React.Component{
             <div className={"infoExtract"}>
                 <div className={"tips"}>Click the file you want to start autofill.</div>
                 <div className={"leftBox"}>
-                    <button className={"back"} onClick={this.prePage}>previous page</button>
-                    <FileList className={"fileList"} files={this.props.files} setShowText={this.setShowText}/>
+                    <Link to={"/"}>
+                        <button className={"back"}>previous page</button>
+                    </Link>
+                    <FileList className={"fileList"} files={this.state.files} setShowText={this.setShowText}/>
                 </div>
                 <div className={"rightBox"}>
                     <div className={"topBox"}>
