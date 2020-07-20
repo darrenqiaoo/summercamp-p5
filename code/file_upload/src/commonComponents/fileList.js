@@ -14,22 +14,14 @@ class FileList extends React.Component{
             this.props.setShowText("Can only preview .txt, .html, .md, .css, .js files");
             return ;
         }
-        const files = this.props.files;
-        const file_names = files.map(f => f.name);
-        const index = file_names.indexOf(file_name);
-        let reader = new FileReader();
-        reader.onload = e => {
-            if(reader.result) {
-                this.props.setShowText(e.target.result);
-            }
-        };
-        reader.readAsText(files[index]);
+        this.props.setShowText(localStorage.getItem(file_name));
     };
 
     render() {
-        const files = this.props.files;
-        const fileList = files.map(file => {
-            return(<li key={file.name.toString()} onClick={() => this.itemClick(file.name)}>{file.name}</li>);
+        const fileList = this.props.files.map(f => {
+            return (
+                <li key={f.toString()} onClick={() => this.itemClick(f)}>{f}</li>
+            );
         });
         return (
             <ul className={this.props.className}>
