@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import PageFileUpload from "./jsPages/fileUpload/FileField";
-import PageInfoExtract from "./jsPages/fileExtract/infoExtract";
-
+import MyTemplate from "./jsPages/template/template";
+import Test from "./tests/test";
 
 function App() {
-  return (
-      <Router>
-        <div>
-          <Route exact path={"/"} component={PageFileUpload}/>
-          <Route path={"/extract"} component={PageInfoExtract}/>
-        </div>
-      </Router>
-  );
+    return (
+        <Router>
+            <div>
+                <Route exact path={"/"} component={MyTemplate}/>
+                <Route path={'/test'} component={Test}/>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
