@@ -41,3 +41,11 @@ now - 14/7 => learning
 
 14/7 - 22/7 => achieve first milestone `upload & save file in chromium`
 
+`2020-7-13`
+
+Meeting minutes =>
+
+* setup frontend and backend to cover scenario one: someone submit a txt file -> upload the file to the backend -> parse the file and fill into a web page by using selenium.
+* enhancements: 
+	1. UI rendering more friendly 
+	2. we can implement OCR by C++, so that it can consumed by WASM.

@@ -1,0 +1,134 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.infoExtract {
+    width: 630px;
+    height: 450px;
+    margin: 100px auto;
+    background-color: #FFFFCC;
+    border: 1px dashed red;
+}
+.tips {
+    width: 630px;
+    height: 20px;
+    border-bottom: 1px dashed red;
+    line-height: 20px;
+    text-align: center;
+}
+.leftBox {
+    float: left;
+    width: 150px;
+    height: 415px;
+    margin-left: 5px;
+    margin-top: 5px;
+    /*border: 1px solid green;*/
+}
+
+.rightBox {
+    float: right;
+    width: 460px;
+    height: 415px;
+    margin-top: 5px;
+    margin-right: 5px;
+    /*border: 1px solid blue;*/
+}
+
+.topBox {
+    float: top;
+    width: 450px;
+    height: 150px;
+    margin-top: 5px;
+    margin-left: 5px;
+    /*border: 1px solid purple;*/
+}
+
+.bottomBox {
+    width: 450px;
+    height: 245px;
+    margin-top: 5px;
+    margin-left: 5px;
+    /*border: 1px solid darkorange;*/
+}
+
+.back {
+    width: 146px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.fileList {
+    width: 139px;
+    height: 365px;
+    margin-top: 5px;
+    margin-left: 2px;
+    padding-top: 5px;
+    padding-left: 5px;
+    border: 1px solid grey;
+}
+.fileList>li {
+    width: 135px;
+    height: 25px;
+    border-bottom: 1px solid grey;
+    list-style-type: none;
+    overflow: hidden;
+    cursor: default;
+}
+.fileList>li:hover {
+    background-color: azure;
+}
+.FileShowBox {
+    width: 440px;
+    height: 140px;
+    margin-top: 3px;
+    margin-left: 3px;
+    /*border: 1px solid grey;*/
+}
+#FileShowBox {
+    width: 420px;
+    height: 120px;
+    background-color: #FFFFCC;
+    resize: none;
+    padding: 10px 10px;
+    overflow: scroll;
+    font-size: 18px;
+}
+#FileShowBox::-webkit-scrollbar{
+    display:none;
+}
+.infoForm {
+    width: 440px;
+    height: 240px;
+    margin-left: 3px;
+    padding-top: 10px;
+    border: 1px solid orange;
+    overflow: scroll;
+}
+.infoForm::-webkit-scrollbar{
+    display:none;
+}
+.formItem {
+    width: 440px;
+    height: 30px;
+    line-height: 30px;
+    /*border-bottom: 1px solid red;*/
+ }
+.formKey{
+    display: inline-block;
+    width: 70px;
+    height: 20px;
+    margin-top: 4px;
+    margin-left: 80px;
+    line-height: 20px;
+    /*border: 1px solid black;*/
+}
+.formItem>input {
+    display: inline-block;
+    width: 200px;
+    height: 20px;
+    margin-top: 3px;
+    margin-left: 10px;
+    background-color: #FFFFCC;
+    border: 1px solid grey;
+}
