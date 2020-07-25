@@ -4,14 +4,34 @@ node_js:
 env:
     # it should change to the related token in codacy
   - CODACY_PROJECT_TOKEN=bfa0e8358d794df199355b3f2587c7bc
+branches:
+  only:
+  - master    # 构建的分支
+cache:
+  directories:
+  - node_modules # 依赖缓存的目录
+install:
+ - npm install -g gitbook-cli # 安装编译工具
 before_script:
   - sudo apt-get install jq
   - curl -LSs "$(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -o codacy-coverage-reporter-assembly.jar
   #- npm install -g karma
-script: true
+script:
+  - cd code/file_upload
+  - npm install
+  - npm run build
   #- npm run build
   #- npm run test
   #- npm run lint
 after_success:
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./lcov.info
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN # github 上的token环境变量
+  local-dir: code/file_upload/build ## 根据情况自定义到静态文件输出目录
+  target-branch: gh-pages
+  verbose: true
+  on:
+    branch: master
