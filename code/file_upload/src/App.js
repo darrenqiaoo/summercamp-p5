@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {HashRouter as Router, Route} from 'react-router-dom';
 import MyTemplate from "./jsPages/template/template";
 import Test from "./tests/test";
 
