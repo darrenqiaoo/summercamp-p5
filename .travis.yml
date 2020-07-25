@@ -14,7 +14,6 @@ install:
  - npm install -g gitbook-cli # 安装编译工具
 before_script:
   - cd code/file_upload
-  - npm install
   - npm install --save-dev @babel/core 
   - npm install --save-dev enzyme enzyme-adapter-react-16 
   - npm install --save-dev @babel/plugin-proposal-class-properties
@@ -25,8 +24,8 @@ before_script:
   #- npm install -g karma
 script:
   #- cd code/file_upload
+  - npm run build
   - npm run test 
-  #- npm run build
   #- npm run test
   #- npm run lint
 after_success:
