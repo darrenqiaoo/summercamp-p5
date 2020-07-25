@@ -11,10 +11,10 @@ cache:
   directories:
   - node_modules # 依赖缓存的目录
 install:
- - npm install
  - npm install -g gitbook-cli # 安装编译工具
 before_script:
   - cd code/file_upload
+  - npm install
   - npm install --save-dev @babel/core 
   - npm install --save-dev enzyme enzyme-adapter-react-16 
   - npm install --save-dev @babel/plugin-proposal-class-properties
@@ -29,9 +29,9 @@ script:
   #- npm run build
   #- npm run test
   #- npm run lint
-#after_success:
-#  - ls
-#  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./lcov.info
+after_success:
+  - ls
+  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./lcov.info
 deploy:
   provider: pages
   skip-cleanup: true
