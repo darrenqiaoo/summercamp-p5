@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 13.2.0 			
+  - "8" 			
 env:
     # it should change to the related token in codacy
   - CODACY_PROJECT_TOKEN=bfa0e8358d794df199355b3f2587c7bc
