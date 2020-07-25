@@ -11,14 +11,15 @@ cache:
   directories:
   - node_modules # 依赖缓存的目录
 install:
+ - cd code/file_upload
+ - npm install
  - npm install -g gitbook-cli # 安装编译工具
 before_script:
-  - cd code/file_upload
-  - npm install --save-dev @babel/core 
+  #- npm install --save-dev @babel/core 
   - npm install --save-dev enzyme enzyme-adapter-react-16 
-  - npm install --save-dev @babel/plugin-proposal-class-properties
-  - npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
-  - npm install --save-dev babel-plugin-transform-es2015-modules-commonjs
+  #- npm install --save-dev @babel/plugin-proposal-class-properties
+  #- npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
+  #- npm install --save-dev babel-plugin-transform-es2015-modules-commonjs
   - sudo apt-get install jq
   - curl -LSs "$(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -o codacy-coverage-reporter-assembly.jar
   #- npm install -g karma
