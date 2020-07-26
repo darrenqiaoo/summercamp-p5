@@ -31,7 +31,7 @@ script:
   #- npm run lint
 after_success:
   - ls
-  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./code/file_upload/coverage/lcov.info
+  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r coverage/lcov.info
 deploy:
   provider: pages
   skip-cleanup: true
