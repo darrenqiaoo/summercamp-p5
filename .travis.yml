@@ -32,7 +32,7 @@ script:
 after_success:
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
-  - vim ./coverage/lcov.info
+  - ls ./coverage
 deploy:
   provider: pages
   skip-cleanup: true
