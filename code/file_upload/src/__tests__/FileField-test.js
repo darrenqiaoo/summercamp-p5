@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Enzyme, {shallow,render,mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import FileField from '../FileField';        //待测试文件的路径；
+import FileField from '../jsPages/fileUpload/FileField';        //待测试文件的路径；
 import { fireEvent } from '@testing-library/react';
 
 Enzyme.configure({adapter: new Adapter()});
