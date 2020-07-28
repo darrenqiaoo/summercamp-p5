@@ -32,7 +32,7 @@ script:
 after_success:
   - ls
   - vim coverage/lcov.info
-  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r coverage/lcov.info
+  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./code/file_upload/coverage/lcov.info
 deploy:
   provider: pages
   skip-cleanup: true
