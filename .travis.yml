@@ -31,6 +31,7 @@ script:
   #- npm run lint
 after_success:
   - ls
+  - vim coverage/lcov.info
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r coverage/lcov.info
 deploy:
   provider: pages
