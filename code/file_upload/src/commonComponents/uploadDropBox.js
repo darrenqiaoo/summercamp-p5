@@ -1,6 +1,6 @@
 import React from "react";
 import { message } from "antd";
-import { FileAddOutlined, BulbOutlined} from '@ant-design/icons';
+import { FileAddOutlined, BulbOutlined} from "@ant-design/icons";
 import "./uploadDropbox.css"
 
 class FileDropBox extends React.Component{

@@ -1,13 +1,13 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import './template.css';
-import { Layout, Menu } from 'antd';
+import React from "react";
+import "antd/dist/antd.css";
+import "./template.css";
+import { Layout, Menu } from "antd";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     FileAddOutlined,
     FolderOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 import UploadPage from "../fileUpload/uploadPage";
 import ExtractPage from "../fileExtract/extractPage";
 
@@ -74,14 +74,14 @@ class MyTemplate extends React.Component {
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }}>
                         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                            className: 'trigger',
+                            className: "trigger",
                             onClick: this.toggle,
                         })}
                     </Header>
                     <Content
                         className="site-layout-background"
                         style={{
-                            margin: '24px 16px',
+                            margin: "24px 16px",
                             padding: 24,
                             minHeight: this.state.height-115,
                         }}

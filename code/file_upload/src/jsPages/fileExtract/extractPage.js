@@ -14,15 +14,15 @@ class ExtractPage extends React.Component{
         this.handleReset = this.handleReset.bind(this);
         this.formRef = React.createRef();
     }
-    showFileContent(file_name){
-        const s = localStorage.getItem(file_name).split('\n');
+    showFileContent(fileName){
+        const s = localStorage.getItem(fileName).split('\n');
         let dic = {};
         for(let i=0;i<s.length;i++){
             const temp = s[i].split(':');
             dic[temp[0]] = temp[1];
         }
         this.setState({
-            fileContent: localStorage.getItem(file_name),
+            fileContent: localStorage.getItem(fileName),
         });
         this.formRef.current.setFieldsValue(dic);
     }
