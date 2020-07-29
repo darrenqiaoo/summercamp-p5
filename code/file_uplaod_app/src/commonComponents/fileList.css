@@ -1,0 +1,32 @@
+.fUl {
+    width: 100%;
+    max-height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    overflow: scroll;
+    text-align: left;
+}
+.fUl::-webkit-scrollbar{
+    display:none;
+}
+.fUl>li {
+    font-size: 18px;
+    list-style-type: none;
+    cursor: default;
+}
+.fUl>li:hover {
+    background-color: rgb(244,243,243);
+    transition: 0.5s all;
+}
+.fName {
+    margin-left: 10px;
+}
+.fDelIcon {
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.fDelIcon:hover {
+    color: red;
+}
