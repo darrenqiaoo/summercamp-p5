@@ -17,6 +17,7 @@ install:
 before_script:
   #- npm install --save-dev @babel/core 
   - npm install --save-dev enzyme enzyme-adapter-react-16 
+  - npm install --save-dev babel-plugin-css-modules-transform
   #- npm install --save-dev @babel/plugin-proposal-class-properties
   #- npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
   #- npm install --save-dev babel-plugin-transform-es2015-modules-commonjs
