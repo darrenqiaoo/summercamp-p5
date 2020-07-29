@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --colors --coverage && coveralls < coverage/lcov.info",
+    "test": "jest --colors --coverage --coverageReporters=text-lcov | coveralls",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
