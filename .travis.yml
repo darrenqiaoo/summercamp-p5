@@ -16,6 +16,7 @@ install:
  - npm install -g gitbook-cli # 安装编译工具
 before_script:
   #- npm install --save-dev @babel/core 
+  - npm install --save-dev coveralls 
   - npm install --save-dev enzyme enzyme-adapter-react-16
   - npm install --save-dev babel-plugin-css-modules-transform
   #- npm install --save-dev @babel/plugin-proposal-class-properties
