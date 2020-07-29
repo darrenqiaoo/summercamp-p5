@@ -25,33 +25,17 @@ describe('shallow test', function () {
     expect(filefield.instance().state.style).toEqual({backgroundColor: "#FFFFCC"});
   });
   
-  /*
-  //测试submit,clear按钮；
-  it('submit test', function(){
-    let filefield = shallow(<FileField/>);
-    let deleteitem=filefield.find('button.submit');
-    let filelength=localStorage.length;
-    deleteitem.simulate('click');
-    //filefield.instance().clear();
-    //console.info(`${localStorage.length}`);
-    let curlength=filelength+1;
-    expect(localStorage.length).toEqual(curlength);
-  });
-  
-  it('clear test', function(){
+  //测试clear清除按钮；
+  it('Clear test', function(){
     let filefield = shallow(<FileField/>);
     let deleteitem=filefield.find('button.clear');
     deleteitem.simulate('click');
-    expect(deleteitem.instance().state.tips).toEqual('no file has been added');
-    expect(deleteitem.instance().state.files).toEqual('');
-    expect(localStorage.length).toEqual(0);
+    expect(filefield.instance().state.tips).toEqual("no file has been added");
+    expect(filefield.instance().state.new_files).toEqual([]);
+    expect(filefield.instance().state.file_names).toEqual([]);
+    expect(filefield.instance().state.showText).toEqual("");
+    expect(localStorage.length).toBe(0);
   });
- 
-  it('clear test', function(){
-    let filefield = shallow(<FileField/>);
-    let deleteitem=filefield.find('span').text();
-    console.info(`${deleteitem}`);
-  });
-  */
-});
+  
+})
 
