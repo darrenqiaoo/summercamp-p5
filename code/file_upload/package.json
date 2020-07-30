@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --colors --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "test": "jest --colors --coverage && cat ./coverage/lcov.info | ./node_modules/bin/coveralls",
     "codacy": "cat ./coverage/lcov.info | codacy-coverage",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
