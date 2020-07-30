@@ -27,7 +27,7 @@ after_success:
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
 after_script: 
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -repotoken $COVERALLS_TOKEN 
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -repotoken IxUiovLLziUAsw9qpWvXtJ9y9ImiP8p6F
 deploy:
   provider: pages
   skip-cleanup: true
