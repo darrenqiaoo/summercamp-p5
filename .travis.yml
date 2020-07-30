@@ -32,6 +32,7 @@ script:
   #- npm run test
   #- npm run lint
 after_success:
+  - npm run coverall
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
 deploy:
