@@ -16,7 +16,7 @@ install:
  - npm install -g gitbook-cli # 安装编译工具
 before_script:
   - npm install --save-dev coveralls 
-  - npm install --save-dev codacy-coverage
+  #- npm install --save-dev codacy-coverage
   - npm install --save-dev enzyme enzyme-adapter-react-16
   - npm install --save-dev babel-plugin-css-modules-transform
   - sudo apt-get install jq
@@ -24,7 +24,7 @@ before_script:
 script:
   - npm run build
   - npm run test 
-  - npm run codacy
+  #- npm run codacy
 after_success:
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
