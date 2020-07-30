@@ -37,5 +37,13 @@ describe('shallow test', function () {
     expect(localStorage.length).toBe(0);
   });
   
+  //测试setShowText；
+  it('setShowText test', function(){
+    let filefield = shallow(<FileField/>);
+    //let deleteitem=filefield.find('button.sumbit');
+    filefield.instance().setShowText("just test");
+    expect(filefield.instance().state.showText).toEqual("just test");
+  });
+  
 })
 
