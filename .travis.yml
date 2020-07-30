@@ -31,12 +31,9 @@ script:
   - npm run test 
   #- npm run test
   #- npm run lint
-after_script:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -repotoken IxUiovLLziUAsw9qpWvXtJ9y9ImiP8p6F
 after_success:
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
-  - cat ./coverage/lcov.info
 deploy:
   provider: pages
   skip-cleanup: true
