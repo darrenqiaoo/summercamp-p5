@@ -24,9 +24,10 @@ before_script:
 script:
   - npm run build
   - npm run test 
+  - npm run codacy
 after_success:
   - ls
-  - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
+  #- java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
 deploy:
   provider: pages
   skip-cleanup: true
