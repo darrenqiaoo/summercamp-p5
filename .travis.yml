@@ -27,6 +27,8 @@ script:
   #- npm run codacy
 after_success:
   - ls
+  - ls ./node_modules/coveralls/bin
+  - ls ./node_modules/bin
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
 deploy:
   provider: pages
