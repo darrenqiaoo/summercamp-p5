@@ -9,11 +9,11 @@ branches:
   - master    # 构建的分支
 cache:
   directories:
-  - node_modules # 依赖缓存的目录
+  - node_modules                  # 依赖缓存的目录
 install:
  - cd code/file_upload
  - npm install
- - npm install -g gitbook-cli # 安装编译工具
+ - npm install -g gitbook-cli      # 安装编译工具
 before_script:
   - npm install --save-dev coveralls 
   #- npm install --save-dev codacy-coverage
