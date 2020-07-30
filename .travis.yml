@@ -24,11 +24,8 @@ script:
   - npm run build
   - npm run test 
 after_success:
-  - npm run coverall
   - ls
   - java -jar codacy-coverage-reporter-assembly.jar report -l Javascript -r ./coverage/lcov.info
-after_script: 
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -repotoken $COVERALLS_TOKEN
 deploy:
   provider: pages
   skip-cleanup: true
