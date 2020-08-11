@@ -42,7 +42,7 @@ class PageFileUpload extends React.Component{
     }
     //文件数量增加
     onFileNumChange(){
-        let objFile = document.getElementById("file_input").files[0];
+        let objFile = document.getElementById("area_extract_for_file_input").files[0];
         let temp1 = this.state.new_files.slice();
         let temp2 = this.state.file_names.slice();
         if(!objFile){
