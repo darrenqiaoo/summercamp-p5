@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import UploadPage from "../fileUpload/uploadPage";
 import ExtractPage from "../fileExtract/extractPage";
+import Login from "../login/login";
 
 const { Header, Sider, Content } = Layout;
 
@@ -25,8 +26,10 @@ class MyTemplate extends React.Component {
             curPage: "upload",
             files: storage,
             height: window.innerHeight,
+            userName: "",
         };
         this.setFiles = this.setFiles.bind(this);
+        this.setUserName = this.setUserName.bind(this);
     }
     componentDidMount() {
         window.addEventListener("resize", this.handleResize.bind(this));
@@ -40,6 +43,11 @@ class MyTemplate extends React.Component {
         this.setState({
             collapsed: !this.state.collapsed,
         });
+        const userName = document.getElementsByClassName("user-name")[0];
+        const userIcon = document.getElementsByClassName("user-icon")[0];
+        userName.style.display = this.state.collapsed?"inline-block":"none";
+        userIcon.style.left = this.state.collapsed?"10px":"50%";
+        userIcon.style.transform = this.state.collapsed?"translateX(0)":"translateX(-50%)";
     };
     setPage(page){
         this.setState({
@@ -51,7 +59,13 @@ class MyTemplate extends React.Component {
             files: files,
         });
     }
+    setUserName(userName) {
+        this.setState({
+            userName: userName,
+        });
+    }
     render() {
+
         let content;
         switch (this.state.curPage) {
             case "upload": content = <UploadPage files={this.state.files} setFiles={this.setFiles}/>;break;
@@ -61,7 +75,10 @@ class MyTemplate extends React.Component {
         return (
             <Layout>
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-                    <div className="logo" />
+                    <div className={"user"}>
+                        <div className={"user-icon"}> {this.state.userName[0]}</div>
+                        <div className={"user-name"}> {this.state.userName.length>0?this.state.userName:"NULL"} </div>
+                    </div>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1" icon={<FileAddOutlined />} onClick={()=>this.setPage("upload")}>
                             Add new files
@@ -84,11 +101,13 @@ class MyTemplate extends React.Component {
                             margin: "24px 16px",
                             padding: 24,
                             minHeight: this.state.height-115,
+                            maxHeight: 850,
                         }}
                     >
                         {content}
                     </Content>
                 </Layout>
+                <Login setUserName={this.setUserName}/>
             </Layout>
         );
     }

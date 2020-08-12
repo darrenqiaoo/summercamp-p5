@@ -29,7 +29,7 @@ class FileList extends React.Component{
                 <li key={f.toString()}>
                     <span style={{display: "inline-block", width: "80%"}} onClick={() => this.itemClick(f)}>
                         <span><PaperClipOutlined /></span>
-                        <span className={"fName"}>{f}</span>
+                        <span className={"fName"}>{f.split("/")[1]}</span>
                     </span>
                     <span className={"fDelIcon"} onClick={() => this.handleDelete(f)}><DeleteOutlined /></span>
                 </li>

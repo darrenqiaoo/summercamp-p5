@@ -37,14 +37,19 @@ class FileDropBox extends React.Component{
             }
         }
         for (let i=0;i<appendList.length;i++){
-            // 将新文件逐一添加到localStorage
-            files.push(appendList[i].name);
+            // 将新文件逐一添加到localStorage，存储格式为"文件类型/文件名"
+            files.push(appendList[i].type.split("/")[0]+"/"+appendList[i].name);
             let reader = new FileReader();
             reader.onload = e => {
                 // 读文件
-                localStorage.setItem(appendList[i].name, e.target.result);
+                localStorage.setItem(appendList[i].type.split("/")[0]+"/"+appendList[i].name, e.target.result.toString());
             };
-            reader.readAsText(appendList[i],'gb2312');
+            switch (appendList[i].type.split("/")[0]){
+                // 根据文件类型用不同方法读文件
+                case "text": reader.readAsText(appendList[i],'gb2312');break;
+                case "image": reader.readAsDataURL(appendList[i]);break;
+                default :
+            }
             message.success(appendList[i].name+" has been added.");
         }
         this.props.setFiles(files); // 更新父组件文件名列表

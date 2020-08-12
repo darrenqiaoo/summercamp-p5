@@ -12,10 +12,44 @@
 
 .logo {
     height: 32px;
-    background: rgba(255, 255, 255, 0.2);
     margin: 16px;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .site-layout .site-layout-background {
     background: #fff;
+}
+.user {
+    position: relative;
+    height: 65px;
+    width: auto;
+    vertical-align: middle;
+    padding: 10px;
+}
+.user-icon {
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    transform: translateX(0);
+    height: 40px;
+    width: 40px;
+    background: cadetblue;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+.user-name {
+    display: inline-block;
+    position: absolute;
+    left: 70px;
+    height: 40px;
+    width: auto;
+    line-height: 40px;
+    text-align: left;
+    font-size: 20px;
+    color: rgb(240,240,240);
+    transition: all 0.5s;
 }

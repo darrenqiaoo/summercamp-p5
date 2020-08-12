@@ -8,7 +8,7 @@
 }
 .extractLeft {
     float: left;
-    width: 20%;
+    width: 25%;
     height: 100%;
     border: 1px solid rgb(238,240,243);
 }
@@ -19,30 +19,39 @@
 }
 .extractRight {
     float: left;
-    width: 75%;
+    width: 70%;
     height: 100%;
     margin-left: 10px;
 }
 .extractTop {
+    max-height: 440px;
     width: 100%;
-    height: 25%;
+    height: auto;
+    text-align: center;
 }
-#fileContent {
+.preview-text {
+    min-height: 200px;
     width: 100%;
-    height: 100%;
+    height: auto;
     resize: none;
     padding-left: 20px;
     font-size: 18px;
     overflow: scroll;
-    border: 1px solid rgb(238,240,243);
+    border: none;
 }
-#fileContent::-webkit-scrollbar{
+.preview-text::-webkit-scrollbar{
     display: none;
 }
+.preview-img {
+    max-width: 440px;
+    height: auto;
+    width: auto;
+}
 .extractBottom {
+    max-height: 400px;
     width: 100%;
-    height: 75%;
-    margin-top: 10px;
+    height: auto;
+    margin-top: 5px;
     overflow: scroll;
 }
 .extractBottom::-webkit-scrollbar {
