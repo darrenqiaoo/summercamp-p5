@@ -1,0 +1,5 @@
+/code/web_server/venv/
+/code/web_server/.idea/
+/code/web_server/__pycache__/
+/code/.DS_Store
+.DS_Store
