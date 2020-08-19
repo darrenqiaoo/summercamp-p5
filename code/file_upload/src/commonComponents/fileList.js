@@ -2,6 +2,7 @@ import React from "react";
 import { DeleteOutlined, PaperClipOutlined } from "@ant-design/icons";
 import { message } from "antd";
 import "./fileList.css"
+import axios from "axios";
 
 class FileList extends React.Component{
     // 文件列表组件
@@ -19,7 +20,11 @@ class FileList extends React.Component{
             }
         }
         this.props.setFiles(tempFiles); // 向父组件返回删除后的文件名列表
-        localStorage.removeItem(fileName); // 删除localStorage中文件名对应的记录
+        axios.post("http://101.200.153.106:3389/delete",
+            {params: {"userName": this.props.userName, "fileName": fileName}})
+            .catch(function (error) {
+                message.error(error);
+            });
         message.success(fileName+" has been deleted.");
     }
     render() {
@@ -29,7 +34,7 @@ class FileList extends React.Component{
                 <li key={f.toString()}>
                     <span style={{display: "inline-block", width: "80%"}} onClick={() => this.itemClick(f)}>
                         <span><PaperClipOutlined /></span>
-                        <span className={"fName"}>{f.split("/")[1]}</span>
+                        <span className={"fName"}>{f}</span>
                     </span>
                     <span className={"fDelIcon"} onClick={() => this.handleDelete(f)}><DeleteOutlined /></span>
                 </li>

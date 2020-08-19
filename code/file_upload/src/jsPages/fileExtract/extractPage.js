@@ -1,16 +1,18 @@
 import React from "react";
 import FileList from "../../commonComponents/fileList";
 import "./extractPage.css"
-import {Button, Form, Input} from "antd"
+import {Button, Form} from "antd"
 import { message } from "antd";
-import axios from "axios";
+import AppList from "../../commonComponents/appList";
+import axios from "axios"
 
 class ExtractPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             fileContent: null, //文件预览内容
-            formItems: null, // 表单内容
+            visible: false,
+            file: null,
         };
 
         this.showFileContent = this.showFileContent.bind(this);
@@ -19,79 +21,59 @@ class ExtractPage extends React.Component{
         this.formRef = React.createRef();
     }
 
-    generateForm(dic){
-        // 生成表单
-        let keys = []; // 将表单字典的键保存到列表
-        for(let k in dic){
-            keys.push(k);
+    showFileContent(fileName){
+        // 预览文件
+        const fileType = fileName.split(".")[1];
+        if(fileType==="txt"){
+            axios.get("http://101.200.153.106:3389/files/"+fileName)
+                .then(response => {
+                    this.setState({
+                        file: fileName,
+                        fileContent: <textarea className={"preview-text"} value={response.data||""} readOnly={true}/>,
+                    });
+                })
+                .catch(function (error) {
+                console.log(error);
+            });
         }
-        const form = keys.map(k => {
-            // 将列表映射到表单
-            return (
-                <Form.Item key={k} name={k} label={k} rules={[{required: true}]}>
-                    <Input />
-                </Form.Item>);
-        });
+        else {
+            this.setState({
+                file: fileName,
+                fileContent: <img className={"preview-img"} src={"http://101.200.153.106:3389/files/"+fileName} alt={""}/>,
+            });
+        }
+    }
+    setVisibility(){
         this.setState({
-            // 将表单更新到页面
-            formItems: form,
+            visible: !this.state.visible,
         });
     }
 
-    showFileContent(fileName){
-        // 预览文件
-        const fileType = fileName.split("/")[0]; //文件类型
-        this.setState({
-            // 预览前重置上次生成的表单
-            formItems: null,
-        });
-        switch (fileType) {
-            // 根据文件类型调用不同处理方式，文本文件直接在前端处理，图片送到后端调用百度文字识别接口识别并返回
-            case "text":
-                this.formRef.current.resetFields();
-                this.setState({
-                    fileContent: <textarea className={"preview-text"} value={localStorage.getItem(fileName)||""} readOnly={true} />,
-                });
-                let dic = {};
-                const s = localStorage.getItem(fileName).split("\n");
-                for(let i=0;i<s.length;i++){
-                    const temp = s[i].split(':');
-                    dic[temp[0]] = temp[1];
-                }
-                this.generateForm(dic);
-                this.formRef.current.setFieldsValue(dic);
-                message.success("autofill complete.");
-                break;
-            case "image":
-                this.formRef.current.resetFields();
-                this.setState({
-                    fileContent: <img className={"preview-img"} src={localStorage.getItem(fileName)} alt={""}/>,
-                });
-                message.loading("getting ocr result...", 1);
-                axios.get("http://101.200.153.106:3389/ocr", {params: {"img": localStorage.getItem(fileName)}})
-                    .then(response => {
-                    let data = response.data;
-                    return data.toString().split("\n");
-                }).then(res => {
-                    let dic = {};
-                    for(let i=0;i<res.length;i++){
-                        const temp = res[i].split(':');
-                        dic[temp[0]] = temp[1];
-                    }
-                    this.generateForm(dic);
-                    this.formRef.current.setFieldsValue(dic);
-                    message.success("autofill complete.");
-                }).catch(function (error) {
-                    message.error(error);
-                });
-                break;
-            default:
+    handleSubmit() {
+        if(!this.state.fileContent){
+            message.warning("No file selected!");
+        }
+        else {
+            this.setVisibility();
         }
     }
-    handleSubmit() {
-        const w = window.open("/test", "_blank");
-        w.onload = () => w.postMessage("hello", w.origin);
+
+    openApp(app){
+        let target;
+        switch(app){
+            case 1: target=1;break;
+            case 2: target=2;break;
+            case 3: target=3;break;
+            case 4: target=4;break;
+            case 5: target=5;break;
+            default:
+        }
+        console.log(target);
+        this.setState({
+            visible: !this.state.visible,
+        });
     }
+
     handleReset(){
         this.setState({
             fileContent: "",
@@ -99,7 +81,6 @@ class ExtractPage extends React.Component{
         });
         this.formRef.current.resetFields();
     }
-
     render() {
         return (
             <div className={"extractPageComponent"}>
@@ -107,7 +88,8 @@ class ExtractPage extends React.Component{
                     <div className={"listTitle"}>
                         <span>File List</span>
                     </div>
-                    <FileList files={this.props.files}
+                    <FileList userName={this.props.userName}
+                              files={this.props.files}
                               setFiles={this.props.setFiles}
                               showFileContent={this.showFileContent}/>
                 </div>
@@ -127,6 +109,11 @@ class ExtractPage extends React.Component{
                         </div>
                     </div>
                 </div>
+                <AppList userName={this.props.userName}
+                         visible={this.state.visible}
+                         setVisibility={() => this.setVisibility()}
+                         setSelectedApp={(app) => this.openApp(app)}
+                         file={this.state.file}/>
             </div>
         );
     }

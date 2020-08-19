@@ -10,7 +10,8 @@ class Example2 extends Example1{
     }
     componentDidMount() {
         let search = this.props.history.location.search;
-        console.log(search);
+        search = search.substr(1,search.length);
+        console.log(JSON.parse(decodeURI(search)));
     }
 
     render() {

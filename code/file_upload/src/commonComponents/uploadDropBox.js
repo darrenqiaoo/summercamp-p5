@@ -2,6 +2,7 @@ import React from "react";
 import { message } from "antd";
 import { FileAddOutlined, BulbOutlined} from "@ant-design/icons";
 import "./uploadDropbox.css"
+import axios from "axios"
 
 class FileDropBox extends React.Component{
     // 文件拖拽组件
@@ -37,12 +38,19 @@ class FileDropBox extends React.Component{
             }
         }
         for (let i=0;i<appendList.length;i++){
-            // 将新文件逐一添加到localStorage，存储格式为"文件类型/文件名"
-            files.push(appendList[i].type.split("/")[0]+"/"+appendList[i].name);
+            files.push(appendList[i].name);
             let reader = new FileReader();
             reader.onload = e => {
-                // 读文件
-                localStorage.setItem(appendList[i].type.split("/")[0]+"/"+appendList[i].name, e.target.result.toString());
+                // 读文件，上传
+                console.log(e.target.result.toString());
+                axios.post("http://101.200.153.106:3389/upload",
+                    {params: {"userName": this.props.userName,
+                                   "type":appendList[i].type.split("/")[0],
+                                   "name":appendList[i].name,
+                                   "content":e.target.result.toString()}})
+                    .catch(function (error) {
+                        message.error(error);
+                    });
             };
             switch (appendList[i].type.split("/")[0]){
                 // 根据文件类型用不同方法读文件

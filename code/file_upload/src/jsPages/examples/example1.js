@@ -1,22 +1,39 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Form, Input, Button } from 'antd';
+
 
 class Example1 extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            receive: "",
-        }
+        this.formRef = React.createRef();
     }
+    onReset = () => {
+        this.formRef.current.resetFields();
+    };
 
-
+    onFill = () => {
+        this.formRef.current.setFieldsValue({
+            note: 'Hello world!',
+        });
+    };
     render() {
         return (
-            <div style={{"width":100, "height":100, "border": "1px solid red"}}>
-                <Link to={{pathname:"/test2", search: "aassddccc"}} target={"_blank"}>
-                    <button> btn </button>
-                </Link>
-            </div>
+            <Form ref={this.formRef} name="control-ref">
+                <Form.Item name="note" label="Note">
+                    <Input />
+                </Form.Item>
+                <Form.Item >
+                    <Button type="primary" htmlType="submit">
+                        Submit
+                    </Button>
+                    <Button htmlType="button" onClick={this.onReset}>
+                        Reset
+                    </Button>
+                    <Button type="link" htmlType="button" onClick={this.onFill}>
+                        Fill form
+                    </Button>
+                </Form.Item>
+            </Form>
         );
     }
 }
