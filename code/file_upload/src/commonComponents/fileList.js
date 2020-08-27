@@ -15,7 +15,7 @@ class FileList extends React.Component{
         let tempFiles = []; // 记录不删除的文件名
         for(let i=0;i<this.props.files.length;i++){
             if(this.props.files[i]!==fileName){
-                // 文件名不是当前眼删除的文件名，记录到tempFiles
+                // 文件名不是当前眼删除的文件名，记录到tempFilesß
                 tempFiles.push(this.props.files[i]);
             }
         }

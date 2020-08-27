@@ -2,13 +2,11 @@ import React from "react";
 import { Modal } from "antd";
 import "./appList.css"
 import {Link} from "react-router-dom";
+import {DropboxOutlined, EditOutlined, FontSizeOutlined, DollarOutlined} from "@ant-design/icons"
 
 class AppList extends React.Component{
-    handleCancel(){
-        this.props.setVisibility();
-    }
-    handelClick(app){
-        this.props.setSelectedApp(app);
+    handelClick(){
+        this.props.setSelectedApp();
     }
     render(){
         return (
@@ -17,50 +15,42 @@ class AppList extends React.Component{
                 visible={this.props.visible}
                 title="Choose an app to open"
                 footer={null}
-                onCancel={() => this.handleCancel()}
+                onCancel={() => this.handelClick()}
             >
                 <ul className={"apps"}>
-                    <li onClick={() => this.handelClick(1)}>
-                        <Link to={{pathname:"/appExample",
-                                   search: JSON.stringify({"userName":this.props.userName, "app": "app1", "file": this.props.file})}}
+                    <li onClick={() => this.handelClick()} style={{display: "block"}}>
+                        <div className={"app"}>
+                            <span className={"appIcon"} style={{backgroundColor: "rgb(0, 109, 217)"}}><DropboxOutlined /></span>
+                            <span className={"appName"}>DropBox</span>
+                        </div>
+                    </li>
+                    <li onClick={() => this.handelClick()} style={{display: this.props.app[0]}}>
+                        <Link to={{pathname:"http://127.0.0.1:3000/markdown",
+                                   search: encodeURIComponent(this.props.file)}}
                               target={"_blank"}>
                             <div className={"app"}>
-                                <span className={"appIcon"}>S</span><span className={"appName"}>Simple Text</span>
+                                <span className={"appIcon"} style={{backgroundColor: "rgb(101, 211, 119)"}}><EditOutlined /></span>
+                                <span className={"appName"}>Markdown</span>
                             </div>
                         </Link>
                     </li>
-                    <li onClick={() => this.handelClick(2)}>
-                        <Link to={{pathname:"/appExample",
-                                   search: JSON.stringify({"userName":this.props.userName, "app": "app2", "file": this.props.file})}}
+                    <li onClick={() => this.handelClick()} style={{display: this.props.app[1]}}>
+                        <Link to={{pathname:"http://127.0.0.1:3000/invoice",
+                                   search: encodeURIComponent(this.props.file)}}
                               target={"_blank"}>
                             <div className={"app"}>
-                                <span className={"appIcon"}>G</span><span className={"appName"}>General</span>
+                                <span className={"appIcon"} style={{backgroundColor: "rgb(248, 206, 94)"}}><DollarOutlined /></span>
+                                <span className={"appName"}>Receipt</span>
                             </div>
                         </Link>
                     </li>
-                    <li onClick={() => this.handelClick(3)}>
-                        <Link to={{pathname:"/appExample",
-                                   search: JSON.stringify({"userName":this.props.userName, "app": "app3", "file": this.props.file})}}
+                    <li onClick={() => this.handelClick()} style={{display: this.props.app[2]}}>
+                        <Link to={{pathname:"http://127.0.0.1:3000/translate",
+                                   search: encodeURIComponent(this.props.file)}}
                               target={"_blank"}>
                             <div className={"app"}>
-                                <span className={"appIcon"}>R</span><span className={"appName"}>Receipt</span>
-                            </div>
-                        </Link>
-                    </li>
-                    <li onClick={() => this.handelClick(4)}>
-                        <Link to={{pathname:"/appExample",
-                                   search: JSON.stringify({"userName":this.props.userName, "app": "app4", "file": this.props.file})}}
-                              target={"_blank"}>
-                            <div className={"app"}>
-                                <span className={"appIcon"}>A</span><span className={"appName"}>APP 4</span>
-                            </div>
-                        </Link>
-                    </li>
-                    <li onClick={() => this.handelClick(5)}>
-                        <Link to={{pathname: "https://app.diagrams.net/",}}
-                              target={"_blank"}>
-                            <div className={"app"}>
-                                <span className={"appIcon"}>A</span><span className={"appName"}>APP 5</span>
+                                <span className={"appIcon"} style={{backgroundColor: "rgb(203, 43, 41)"}}><FontSizeOutlined /></span>
+                                <span className={"appName"}>Translate</span>
                             </div>
                         </Link>
                     </li>

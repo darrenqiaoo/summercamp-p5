@@ -13,6 +13,7 @@ class ExtractPage extends React.Component{
             fileContent: null, //文件预览内容
             visible: false,
             file: null,
+            app: ["block", "block", "block"],
         };
 
         this.showFileContent = this.showFileContent.bind(this);
@@ -24,16 +25,16 @@ class ExtractPage extends React.Component{
     showFileContent(fileName){
         // 预览文件
         const fileType = fileName.split(".")[1];
-        if(fileType==="txt"){
-            axios.get("http://101.200.153.106:3389/files/"+fileName)
-                .then(response => {
-                    this.setState({
-                        file: fileName,
-                        fileContent: <textarea className={"preview-text"} value={response.data||""} readOnly={true}/>,
-                    });
-                })
-                .catch(function (error) {
-                console.log(error);
+        if(fileType==="txt"||fileType==="md"){
+            axios.get("http://101.200.153.106:3389/markdown", {
+                params: {file: fileName}
+            }).then(response => {
+                this.setState({
+                    file: fileName,
+                    fileContent: <textarea className={"preview-text"} value={response.data||""} readOnly={true}/>,
+                });
+            }).catch(e => {
+                console.log(e);
             });
         }
         else {
@@ -43,32 +44,15 @@ class ExtractPage extends React.Component{
             });
         }
     }
-    setVisibility(){
-        this.setState({
-            visible: !this.state.visible,
-        });
-    }
-
     handleSubmit() {
         if(!this.state.fileContent){
             message.warning("No file selected!");
         }
         else {
-            this.setVisibility();
+            this.openApp();
         }
     }
-
-    openApp(app){
-        let target;
-        switch(app){
-            case 1: target=1;break;
-            case 2: target=2;break;
-            case 3: target=3;break;
-            case 4: target=4;break;
-            case 5: target=5;break;
-            default:
-        }
-        console.log(target);
+    openApp(){
         this.setState({
             visible: !this.state.visible,
         });
@@ -111,8 +95,8 @@ class ExtractPage extends React.Component{
                 </div>
                 <AppList userName={this.props.userName}
                          visible={this.state.visible}
-                         setVisibility={() => this.setVisibility()}
-                         setSelectedApp={(app) => this.openApp(app)}
+                         app={this.state.app}
+                         setSelectedApp={() => this.openApp()}
                          file={this.state.file}/>
             </div>
         );

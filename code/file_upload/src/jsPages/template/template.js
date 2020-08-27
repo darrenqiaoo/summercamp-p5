@@ -32,6 +32,7 @@ class MyTemplate extends React.Component {
     }
     componentDidMount() {
         window.addEventListener("resize", this.handleResize.bind(this));
+        console.log(this.state.height);
         const lastUser = localStorage.getItem("lastUser");
         if(lastUser){
             this.setUserName(lastUser)
