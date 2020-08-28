@@ -1,8 +1,4 @@
 import React from "react";
-import './FileField.css'
-import FileShowBox from '../../commonComponents/fileShowBox'
-import FileList from "../../commonComponents/fileList";
-import {Link} from "react-router-dom";
 
 class PageFileUpload extends React.Component{
     constructor(props) {
@@ -107,16 +103,9 @@ class PageFileUpload extends React.Component{
                                onDrop={() => this.dropFile()}
                                onChange={() => this.onFileNumChange()}/>
                     </div>
-                    <div className={"file_list_container"}>
-                        <FileShowBox className={"showFile"} id={"showBox"} value={this.state.showText}/>
-                        <FileList className={"file_ul"} files={this.state.file_names} setShowText={this.setShowText}/>
-                    </div>
 
                     <button className={"submit"} onClick={this.submitBtnClick}> submit </button>
                     <button className={"clear"} onClick={this.clear}> clear </button>
-                    <Link to={"/extract"}>
-                        <button className={"next"}> next </button>
-                    </Link>
                 </div>
             </div>
         );

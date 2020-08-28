@@ -1,33 +1,70 @@
 import React from "react";
 import FileList from "../../commonComponents/fileList";
 import "./extractPage.css"
-import { Form, Input, Button} from "antd"
-
+import {Button, Form} from "antd"
+import { message } from "antd";
+import AppList from "../../commonComponents/appList";
+import axios from "axios"
 
 class ExtractPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            fileContent: "",
+            fileContent: null, //文件预览内容
+            visible: false,
+            file: null,
+            app: ["block", "block", "block"],
         };
+
         this.showFileContent = this.showFileContent.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleReset = this.handleReset.bind(this);
         this.formRef = React.createRef();
     }
-    showFileContent(file_name){
-        const s = localStorage.getItem(file_name).split('\n');
-        let dic = {};
-        for(let i=0;i<s.length;i++){
-            const temp = s[i].split(':');
-            dic[temp[0]] = temp[1];
+
+    showFileContent(fileName){
+        // 预览文件
+        const fileType = fileName.split(".")[1];
+        if(fileType==="txt"||fileType==="md"){
+            axios.get("http://101.200.153.106:3389/markdown", {
+                params: {file: fileName}
+            }).then(response => {
+                this.setState({
+                    file: fileName,
+                    fileContent: <textarea className={"preview-text"} value={response.data||""} readOnly={true}/>,
+                });
+            }).catch(e => {
+                console.log(e);
+            });
         }
-        this.setState({
-            fileContent: localStorage.getItem(file_name),
-        });
-        this.formRef.current.setFieldsValue(dic);
+        else {
+            this.setState({
+                file: fileName,
+                fileContent: <img className={"preview-img"} src={"http://101.200.153.106:3389/files/"+fileName} alt={""}/>,
+            });
+        }
     }
+    handleSubmit() {
+        if(!this.state.fileContent){
+            message.warning("No file selected!");
+        }
+        else {
+            this.openApp();
+        }
+    }
+    openApp(){
+        this.setState({
+            visible: !this.state.visible,
+        });
+    }
+
     handleReset(){
-        this.formRef.current.resetFields();
+        this.setState({
+            fileContent: "",
+            formItems: null,
+        });
+        if(this.formRef.current)
+            this.formRef.current.resetFields();
     }
     render() {
         return (
@@ -36,43 +73,32 @@ class ExtractPage extends React.Component{
                     <div className={"listTitle"}>
                         <span>File List</span>
                     </div>
-                    <FileList files={this.props.files}
+                    <FileList userName={this.props.userName}
+                              files={this.props.files}
                               setFiles={this.props.setFiles}
                               showFileContent={this.showFileContent}/>
                 </div>
                 <div className={"extractRight"}>
                     <div className={"extractTop"}>
-                        <textarea id={"fileContent"} value={this.state.fileContent||""} readOnly={true} />
+                        {this.state.fileContent}
                     </div>
                     <div className={"extractBottom"}>
                         <div className={"infoFormBox"}>
                             <Form ref={this.formRef} labelCol={{span:6}}>
-                                <Form.Item name={"Name"} label={"Name"} rules={[{required: true}]}>
-                                    <Input />
-                                </Form.Item>
-                                <Form.Item name={"Age"} label={"Age"} rules={[{required: true}]}>
-                                    <Input />
-                                </Form.Item>
-                                <Form.Item name={"Tel"} label={"Tel"} rules={[{required: true}]}>
-                                    <Input />
-                                </Form.Item>
-                                <Form.Item name={"Email"} label={"Email"} rules={[{required: true}]}>
-                                    <Input />
-                                </Form.Item>
-                                <Form.Item name={"City"} label={"City"} rules={[{required: true}]}>
-                                    <Input />
-                                </Form.Item>
-                                <Form.Item name={"Intention"} label={"Intention"} rules={[{required: true}]}>
-                                    <Input />
-                                </Form.Item>
+                                {this.state.formItems}
                                 <Form.Item wrapperCol={{offset: 12,span: 16,}}>
-                                    <Button type="primary" htmlType="submit">Submit</Button>
+                                    <Button type="primary" htmlType="submit" onClick={this.handleSubmit}>Submit</Button>
                                     <Button htmlType="button" onClick={this.handleReset}>Reset</Button>
                                 </Form.Item>
                             </Form>
                         </div>
                     </div>
                 </div>
+                <AppList userName={this.props.userName}
+                         visible={this.state.visible}
+                         app={this.state.app}
+                         setSelectedApp={() => this.openApp()}
+                         file={this.state.file}/>
             </div>
         );
     }

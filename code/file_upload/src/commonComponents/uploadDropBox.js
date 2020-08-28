@@ -1,21 +1,42 @@
 import React from "react";
-import { message } from "antd";
-import { FileAddOutlined, BulbOutlined} from '@ant-design/icons';
+import {message} from "antd";
+import {BulbOutlined, FileAddOutlined} from "@ant-design/icons";
 import "./uploadDropbox.css"
+import axios from "axios"
+import AppList from "./appList";
 
 class FileDropBox extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible: false,
+            file: "",
+            app: ["none", "none", "none"],
+        };
+    }
+    openApp(){
+        this.setState({
+            visible: false,
+        });
+    }
     // 文件拖拽组件
     borderColorLight(){
         // 鼠标进入或文件拖入，组件边框及背景的响应
         const fileDropBox = document.getElementById("fileDropBox");
-        fileDropBox.style.borderColor = "#379FFF";
-        fileDropBox.style.backgroundColor = "#F8F8F8";
+        if(fileDropBox)
+        {
+            fileDropBox.style.borderColor = "#379FFF";
+            fileDropBox.style.backgroundColor = "#F8F8F8";
+        }
     }
     borderColorDim(){
         // 鼠标离开或文件拖拽结束或取消文件拖拽，文件上传组件边框恢复原始状态
         const fileDropBox = document.getElementById("fileDropBox");
-        fileDropBox.style.borderColor = "#D4D4D4";
-        fileDropBox.style.backgroundColor = "#FFFFFF";
+        if(fileDropBox)
+        {
+            fileDropBox.style.borderColor = "#D4D4D4";
+            fileDropBox.style.backgroundColor = "#FFFFFF";
+        }
     }
     handleAddFile(e){
         // 文件输入框有新文件加入
@@ -37,15 +58,47 @@ class FileDropBox extends React.Component{
             }
         }
         for (let i=0;i<appendList.length;i++){
-            // 将新文件逐一添加到localStorage
             files.push(appendList[i].name);
             let reader = new FileReader();
             reader.onload = e => {
-                // 读文件
-                localStorage.setItem(appendList[i].name, e.target.result);
+                // 读文件，上传
+                axios.post("http://101.200.153.106:3389/upload",
+                    {params: {"userName": this.props.userName,
+                                   "type":appendList[i].type.split("/")[0],
+                                   "name":appendList[i].name,
+                                   "content":e.target.result.toString()}})
+                    .catch(function (error) {
+                        message.error(error);
+                    });
             };
-            reader.readAsText(appendList[i],'gb2312');
+            switch ((appendList[i].type || '').split("/")[0]){
+                // 根据文件类型用不同方法读文件
+                case "text": reader.readAsText(appendList[i],'utf8');break;
+                case "image": reader.readAsDataURL(appendList[i]);break;
+                default :
+            }
             message.success(appendList[i].name+" has been added.");
+        }
+        if(appendList.length===1){
+            this.setState({
+                visible: true,
+                file: appendList[0].name,
+            });
+            if((appendList[0].type || '').split("/")[0]==="image"){
+                this.setState({
+                    app: ["none", "block", "block"],
+                });
+            }
+            if((appendList[0].name || '').split(".")[1]==="txt"){
+                this.setState({
+                    app: ["block", "none", "block"],
+                });
+            }
+            if((appendList[0].name || '').split(".")[1]==="md"){
+                this.setState({
+                    app: ["block", "none", "none"],
+                });
+            }
         }
         this.props.setFiles(files); // 更新父组件文件名列表
         e.target.value = []; // 清空文件输入框
@@ -55,8 +108,12 @@ class FileDropBox extends React.Component{
             <div className={"fileDropBox"} id={"fileDropBox"}
                  onMouseEnter={() => this.borderColorLight()}
                  onMouseLeave={() => this.borderColorDim()}>
+                <AppList visible={this.state.visible}
+                         setSelectedApp={() => this.openApp()}
+                         file={this.state.file}
+                         app={this.state.app}/>
                 <span className="uploadDragIcon"><FileAddOutlined /></span>
-                <span className="uploadTips"><BulbOutlined /> &nbsp;Click or drag file to this area to upload</span>
+                <span className="uploadTips"><BulbOutlined />Click or drag file to this area to upload</span>
                 <input type={"file"} id={"fileInput"} title={""} multiple={true}
                        onDragEnter={() => this.borderColorLight()}
                        onDragLeave={() => this.borderColorDim()}
