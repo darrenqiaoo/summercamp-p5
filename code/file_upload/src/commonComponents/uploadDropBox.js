@@ -23,14 +23,20 @@ class FileDropBox extends React.Component{
     borderColorLight(){
         // 鼠标进入或文件拖入，组件边框及背景的响应
         const fileDropBox = document.getElementById("fileDropBox");
-        fileDropBox.style.borderColor = "#379FFF";
-        fileDropBox.style.backgroundColor = "#F8F8F8";
+        if(fileDropBox)
+        {
+            fileDropBox.style.borderColor = "#379FFF";
+            fileDropBox.style.backgroundColor = "#F8F8F8";
+        }
     }
     borderColorDim(){
         // 鼠标离开或文件拖拽结束或取消文件拖拽，文件上传组件边框恢复原始状态
         const fileDropBox = document.getElementById("fileDropBox");
-        fileDropBox.style.borderColor = "#D4D4D4";
-        fileDropBox.style.backgroundColor = "#FFFFFF";
+        if(fileDropBox)
+        {
+            fileDropBox.style.borderColor = "#D4D4D4";
+            fileDropBox.style.backgroundColor = "#FFFFFF";
+        }
     }
     handleAddFile(e){
         // 文件输入框有新文件加入
@@ -65,7 +71,7 @@ class FileDropBox extends React.Component{
                         message.error(error);
                     });
             };
-            switch (appendList[i].type.split("/")[0]){
+            switch ((appendList[i].type || '').split("/")[0]){
                 // 根据文件类型用不同方法读文件
                 case "text": reader.readAsText(appendList[i],'utf8');break;
                 case "image": reader.readAsDataURL(appendList[i]);break;
@@ -78,17 +84,17 @@ class FileDropBox extends React.Component{
                 visible: true,
                 file: appendList[0].name,
             });
-            if(appendList[0].type.split("/")[0]==="image"){
+            if((appendList[0].type || '').split("/")[0]==="image"){
                 this.setState({
                     app: ["none", "block", "block"],
                 });
             }
-            if(appendList[0].name.split(".")[1]==="txt"){
+            if((appendList[0].name || '').split(".")[1]==="txt"){
                 this.setState({
                     app: ["block", "none", "block"],
                 });
             }
-            if(appendList[0].name.split(".")[1]==="md"){
+            if((appendList[0].name || '').split(".")[1]==="md"){
                 this.setState({
                     app: ["block", "none", "none"],
                 });
@@ -107,7 +113,7 @@ class FileDropBox extends React.Component{
                          file={this.state.file}
                          app={this.state.app}/>
                 <span className="uploadDragIcon"><FileAddOutlined /></span>
-                <span className="uploadTips"><BulbOutlined /> &nbsp;Click or drag file to this area to upload</span>
+                <span className="uploadTips"><BulbOutlined />Click or drag file to this area to upload</span>
                 <input type={"file"} id={"fileInput"} title={""} multiple={true}
                        onDragEnter={() => this.borderColorLight()}
                        onDragLeave={() => this.borderColorDim()}

@@ -63,7 +63,8 @@ class ExtractPage extends React.Component{
             fileContent: "",
             formItems: null,
         });
-        this.formRef.current.resetFields();
+        if(this.formRef.current)
+            this.formRef.current.resetFields();
     }
     render() {
         return (
