@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Enzyme, {shallow,render,mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import FileField from '../src/jsPages/fileUpload/FileField';        //待测试文件的路径；
-import { fireEvent } from '@testing-library/react';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -16,13 +15,18 @@ describe('shallow test', function () {
   //文件进入showbox以及出来时，看showbox框颜色是否变化；
   it('the color of showbox has been changed', function(){
     let filefield = shallow(<FileField/>);
-    expect(filefield.instance().state.style).toEqual({backgroundColor: "#FFFFCC"});
-    filefield.instance().dragEnter();
+
+    filefield.find('input').simulate('dragenter');
     expect(filefield.instance().state.style).toEqual({backgroundColor: "#FFFF66"});
-    filefield.instance().dragLeave();
+    
+    filefield.find('input').simulate('dragleave');
     expect(filefield.instance().state.style).toEqual({backgroundColor: "#FFFFCC"});
-    filefield.instance().dropFile();
+
+    filefield.find('input').simulate('drop');
     expect(filefield.instance().state.style).toEqual({backgroundColor: "#FFFFCC"});
+  
+    filefield.instance().setShowText("test.txt");
+    expect(filefield.instance().state.showText).toEqual("test.txt");
   });
   
   //测试clear清除按钮；
@@ -37,5 +41,14 @@ describe('shallow test', function () {
     expect(localStorage.length).toBe(0);
   });
   
+  it('Test for submitBtnClick', function(){
+    const props = {
+      file_names:["test.txt"]
+    };  
+    localStorage.setItem('test.txt', 'hello offer!');
+    let wrapper = shallow(<FileField {...props} />);
+    wrapper.find('button.submit').simulate('click');
+
+  });
 })
 
