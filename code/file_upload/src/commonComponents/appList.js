@@ -25,7 +25,7 @@ class AppList extends React.Component{
                         </div>
                     </li>
                     <li onClick={() => this.handelClick()} style={{display: this.props.app[0]}}>
-                        <Link to={{pathname:"http://127.0.0.1:3000/markdown",
+                        <Link to={{pathname:"http://101.200.153.106:3000/markdown",
                                    search: encodeURIComponent(this.props.file)}}
                               target={"_blank"}>
                             <div className={"app"}>
@@ -35,7 +35,7 @@ class AppList extends React.Component{
                         </Link>
                     </li>
                     <li onClick={() => this.handelClick()} style={{display: this.props.app[1]}}>
-                        <Link to={{pathname:"http://127.0.0.1:3000/invoice",
+                        <Link to={{pathname:"http://101.200.153.106:3000/invoice",
                                    search: encodeURIComponent(this.props.file)}}
                               target={"_blank"}>
                             <div className={"app"}>
@@ -45,7 +45,7 @@ class AppList extends React.Component{
                         </Link>
                     </li>
                     <li onClick={() => this.handelClick()} style={{display: this.props.app[2]}}>
-                        <Link to={{pathname:"http://127.0.0.1:3000/translate",
+                        <Link to={{pathname:"http://101.200.153.106:3000/translate",
                                    search: encodeURIComponent(this.props.file)}}
                               target={"_blank"}>
                             <div className={"app"}>
