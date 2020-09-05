@@ -1,0 +1,68 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.extractPageComponent {
+    width: 100%;
+    height: 100%;
+}
+.extractLeft {
+    float: left;
+    width: 25%;
+    height: 100%;
+    border: 1px solid rgb(238,240,243);
+}
+.listTitle {
+    font-size: 25px;
+    padding-left: 10px;
+    border-bottom: 1px solid rgb(238,240,243);
+}
+.extractRight {
+    float: left;
+    width: 70%;
+    height: 100%;
+    margin-left: 10px;
+}
+.extractTop {
+    max-height: 440px;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.preview-text {
+    min-height: 200px;
+    width: 100%;
+    height: auto;
+    resize: none;
+    padding-left: 20px;
+    font-size: 18px;
+    overflow: scroll;
+    border: none;
+}
+.preview-text::-webkit-scrollbar{
+    display: none;
+}
+.preview-img {
+    max-width: 440px;
+    height: auto;
+    width: auto;
+}
+.extractBottom {
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    overflow: scroll;
+}
+.extractBottom::-webkit-scrollbar {
+    display: none;
+}
+.infoFormBox {
+    width: 100%;
+    height: 100%;
+    padding-right: 100px;
+    margin: 0 auto;
+}
+.ant-btn {
+    margin-right: 8px;
+}

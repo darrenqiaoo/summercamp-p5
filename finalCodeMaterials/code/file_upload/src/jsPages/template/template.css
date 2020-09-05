@@ -1,0 +1,75 @@
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+.user {
+    position: relative;
+    height: 65px;
+    width: auto;
+    padding: 10px;
+}
+.user-icon {
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    transform: translateX(0);
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    margin-top: -20px;
+    background: cadetblue;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+.user-name {
+    display: inline-block;
+    position: absolute;
+    left: 70px;
+    height: 40px;
+    width: auto;
+    top: 50%;
+    margin-top: -20px;
+    line-height: 40px;
+    text-align: left;
+    font-size: 20px;
+    color: rgb(240,240,240);
+    transition: all 0.5s;
+}
+.login {
+    display: inline-block;
+    position: absolute;
+    height: 30px;
+    width: 55px;
+    right: 10px;
+    top: 50%;
+    margin-top: -15px;
+    background-color: #2f435e;
+    color: #f2f2f2;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+.login:hover {
+    background-color: #385f9e;
+}
